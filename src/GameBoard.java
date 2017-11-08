@@ -53,7 +53,9 @@ public class GameBoard extends JPanel {
             for(int y = 0; y < 8; y++) {
                 for (int x = 0; x < 8; x++) {
                     squares[y][x].draw(g);
-                    drawMoves(g, squares[y][x]);
+                    if (squares[y][x].isSelected) {
+                        drawMoves(g, squares[y][x]);
+                    }
                 }
             }
         }
