@@ -9,6 +9,7 @@ public class Square {
     int y;
     static int size;
     boolean isSelected = false;
+    Piece piece;
     public Square(int size, int x, int y, boolean isWhite) {
         this.size = size;
         this.x = x;
@@ -24,5 +25,9 @@ public class Square {
             g.setColor(Color.GREEN);
             g.fillRect((x - 1) * size, (y - 1) * size, size, size);
         }
+    }
+    public void drawAsMovable(Graphics g) {
+        g.setColor(new Color(152,251,152));
+        g.fillRect((x - 1) * size, (y - 1) * size, size, size);
     }
 }

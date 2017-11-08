@@ -22,6 +22,7 @@ public class GameBoard extends JPanel {
         createSquares();
         this.addMouseListener(new MouseHandler());
         teams[0] = new Team(1, Color.WHITE);
+        repaint();
     }
 
     public void createSquares() {
@@ -33,6 +34,18 @@ public class GameBoard extends JPanel {
         squaresMade = true;
     }
 
+    public void drawMoves(Graphics g, Square selectedSquare) {
+        for(int y = 0; y < 8; y++) {
+            for (int x = 0; x < 8; x++) {
+               if (selectedSquare.piece != null) {
+                   if (selectedSquare.piece.canMove(GameBoard.squares[y][x])) {
+                       squares[y][x].drawAsMovable(g);
+                   }
+               }
+            }
+        }
+    }
+
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         this.setBackground(Color.BLACK);
@@ -40,12 +53,13 @@ public class GameBoard extends JPanel {
             for(int y = 0; y < 8; y++) {
                 for (int x = 0; x < 8; x++) {
                     squares[y][x].draw(g);
+                    drawMoves(g, squares[y][x]);
                 }
             }
         }
-            for (Piece piece : teams[0].pieces) {
-                piece.draw(g);
-            }
+        for (Piece piece : teams[0].pieces) {
+            piece.draw(g);
+        }
     }
 
     private class MouseHandler implements MouseListener, MouseMotionListener {

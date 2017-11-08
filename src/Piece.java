@@ -11,6 +11,7 @@ public abstract class Piece {
     public abstract void draw(Graphics g);
     public Piece(int x, int y) {
         square = GameBoard.squares[y][x];
+        square.piece = this;
     }
     public Piece() {
 
